@@ -1,0 +1,41 @@
+---
+#tasks file for phase2  Configure for Phase2
+
+- name: Clone Company repositories      #defined in defaults/main.yml
+  git:
+    repo: "{{ item }}"
+    dest: /home/{{ username }}/checkout
+    force: yes
+  with_items: "{{ comrepos }}"
+
+
+- name: Clone team repos             #defined in group_vars directory
+  git:
+    repo: "{{ item }}"
+    dest: /home/{{ username }}/checkout
+    force: yes
+  with_items: "{{ teamrepos }}"
+
+
+- name: Clone personal repos            #declared in host_vars directory
+  git:
+    repo: "{{ item }}"
+    dest: /home/{{ username }}/checkout
+    force: yes
+  with_items: "{{ personalrepo }}"
+
+
+## Start Phase 3  --------------- #
+
+
+- name: Company Softwares installation    #defined in defaults/main.yml
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ companysoftwares }}"
+
+- name: Team Softwares installation       #defined in group_vars
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ teamsoft }}"

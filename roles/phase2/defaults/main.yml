@@ -1,0 +1,12 @@
+---
+# defaults file for phase2
+
+#Company Repos to be cloned
+
+comrepos:
+  - https://github.com/OT-OSM/jenkins.git
+  - https://github.com/OT-OSM/MySQL.git
+
+companysoftwares:
+  - git
+  - vim

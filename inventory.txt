@@ -1,0 +1,15 @@
+
+[EthanHunt]
+web1 username=deepak
+web2 username=sumit
+
+
+[DevNin]
+web3 username=vinod
+
+[EthanH:children]
+EthanHunt
+
+
+[DevNinja:children]
+DevNin

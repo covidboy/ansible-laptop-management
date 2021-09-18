@@ -1,0 +1,55 @@
+---
+- name: User creation
+  user:
+    name: "{{ username }}"
+    shell: /bin/bash
+    generate_ssh_key: yes
+    ssh_key_bits: 2048
+    state: present
+
+- name: fetching the ssh key files
+  fetch:
+    src: /home/{{ username }}/.ssh/id_rsa.pub
+    dest: /tmp/{{ username }}/.ssh/id_rsa.pub
+    flat: yes
+  tags: fetching_ssh
+
+##--------------------------------------------------------------------------------------------------##
+
+- name: manager user
+  user:
+    name: manager
+    shell: /bin/bash
+    state: present
+
+- name: entry in sudoers file
+  lineinfile:
+    dest: /etc/sudoers
+    line: 'manager ALL=(ALL:ALL) NOPASSWD:ALL'
+    insertafter: '^root.+ALL'
+
+##--------------------------------------------------------------------------------------------------##
+
+# - name: Checking with debug
+#   debug:
+#     var: other_users
+#   when: hostvars[item].userName != username
+#   tags: debug
+
+##--------------------------------------------------------------------------------------------------##
+
+- name: copy ssh keys to other users
+  authorized_key:
+    user: "{{ username }}"
+    state: present
+    key: "{{ lookup('file', '/tmp/{{ item }}/.ssh/id_rsa.pub') }}"
+  with_items: "{{ other_users }}"
+  # with_file:
+  #   - /tmp/{{ username }}/.ssh/id_rsa.pub
+  tags: ssh_key
+
+- name: transfer ssh config file
+  template:
+    src: /etc/ansible/laptopmanagement/roles/phase1/templates/config.j2
+    dest: /home/{{ username }}/.ssh/config
+  tags: config

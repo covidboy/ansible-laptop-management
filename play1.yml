@@ -1,0 +1,5 @@
+- name: Configuring Phase1
+  hosts: all
+  roles:
+    - phase1
+    - phase2

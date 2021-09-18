@@ -1,0 +1,13 @@
+{% for host in userDetails %}
+host {{ hostvars[host].username }}
+    User {{ hostvars[host].username}}
+    Hostname {{ hostvars[host].ansible_host }}
+{% endfor %}
+
+{#
+{% for x in userDetails %}
+host {{ x.username }}
+    User {{ x.username}}
+    Hostname {{ x.ansible_host }}
+{% endfor %}
+  #}

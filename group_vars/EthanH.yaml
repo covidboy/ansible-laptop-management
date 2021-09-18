@@ -1,0 +1,12 @@
+
+other_users: "{{ groups['EthanHunt'] | map('extract', hostvars, ['username']) | list }}"
+
+userDetails: "{{ groups['EthanHunt'] }}"
+
+teamrepos:
+  - git@gitlab.com:ot-devops-ninja/batch8/linux.git
+#- abcd.git
+#- xyz.git
+
+teamsoft:
+  - nginx

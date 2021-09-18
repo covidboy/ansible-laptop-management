@@ -1,0 +1,15 @@
+# - name: copy ssh keys to other users
+#   # authorized_key:
+#   # user: "{{ other_users }}"
+#   debug:
+#     var: other_users
+
+  #   key: "{{ item }}"
+  # with_file:
+  #   - /home/{{ username }}/.ssh/id_rsa.pub
+  # when: hostvars[item].userName != userName
+#
+# - name: Copying the Config file
+#   template:
+#     src: /etc/ansible/laptopmanagement/roles/phase1/templates/config.j2
+#     dest: /home/{{ username }}/.ssh/config

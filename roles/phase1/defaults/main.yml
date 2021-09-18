@@ -1,0 +1,11 @@
+---
+# defaults file for phase1
+
+#other_users: "{{ groups['EthanHunt'] | map('extract', hostvars, ['username']) | list }}"
+
+
+
+#userDetails: "{{ groups['EthanHunt'] }}"
+
+
+

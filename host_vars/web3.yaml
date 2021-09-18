@@ -1,0 +1,9 @@
+ansible_host: 192.168.0.112
+ansible_ssh_user: subhabrata
+ansible_ssh_pass: subho123456
+ansible_become: true
+ansible_become_pass: subho123456
+
+
+personalrepo:
+  #-xyz.git
